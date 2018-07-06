@@ -118,10 +118,9 @@ class EnterpriseOfferFormTests(EnterpriseServiceMockMixin, TestCase):
             data['enterprise_customer_catalog_uuid'],
             data['benefit_value'],
             data['benefit_type'],
-            'Discount of type {} provided by {} for {}.'.format(
+            'Discount of type {} provided by {}.'.format(
                 ConditionalOffer.SITE,
                 data['enterprise_customer_name'],
-                data['enterprise_customer_catalog_uuid']
             ),
         )
 
@@ -144,9 +143,7 @@ class EnterpriseOfferFormTests(EnterpriseServiceMockMixin, TestCase):
             data['enterprise_customer_catalog_uuid'],
             data['benefit_value'],
             data['benefit_type'],
-            'Discount of type Site provided by Spánish Enterprise for {}.'.format(
-                data['enterprise_customer_catalog_uuid']
-            ),
+            'Discount of type Site provided by Spánish Enterprise.'
         )
 
     @httpretty.activate
@@ -170,10 +167,9 @@ class EnterpriseOfferFormTests(EnterpriseServiceMockMixin, TestCase):
             data['enterprise_customer_catalog_uuid'],
             data['benefit_value'],
             data['benefit_type'],
-            'Discount of type {} provided by {} for {}.'.format(
+            'Discount of type {} provided by {}.'.format(
                 ConditionalOffer.SITE,
                 data['enterprise_customer_name'],
-                data['enterprise_customer_catalog_uuid']
             ),
         )
 
@@ -204,10 +200,9 @@ class EnterpriseOfferFormTests(EnterpriseServiceMockMixin, TestCase):
             data['enterprise_customer_catalog_uuid'],
             data['benefit_value'],
             data['benefit_type'],
-            'Discount of type {} provided by {} for {}.'.format(
+            'Discount of type {} provided by {}.'.format(
                 ConditionalOffer.SITE,
                 data['enterprise_customer_name'],
-                data['enterprise_customer_catalog_uuid']
             ),
         )
 

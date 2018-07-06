@@ -96,11 +96,15 @@ class EnterpriseOfferForm(forms.ModelForm):
 
         # Note: the actual name is not displayed like this in the template, so it's safe to use the UUID here.
         # And in fact we have to, because otherwise we face integrity errors since Oscar forces this name to be unique.
-        self.instance.name = _(u'Discount of type {} provided by {} for {}.'.format(
+        # Truncate enterprise_customer_name down to 48 characters, as Oscar's AbstractConditionalOffer name is
+        # max_length 128
+        offer_name = _(u'Discount of type {} provided by {} for {}.'.format(
             ConditionalOffer.SITE,
-            enterprise_customer_name,
-            enterprise_customer_catalog_uuid,
+            enterprise_customer_name[:48] if len(enterprise_customer_name) > 48 else enterprise_customer_name,  # pylint: disable=unsubscriptable-object,
+            enterprise_customer_catalog_uuid
         ))
+
+        self.instance.name = offer_name
         self.instance.status = ConditionalOffer.OPEN
         self.instance.offer_type = ConditionalOffer.SITE
         self.instance.max_basket_applications = 1
@@ -116,14 +120,14 @@ class EnterpriseOfferForm(forms.ModelForm):
 
             if hasattr(self.instance, 'condition'):
                 self.instance.condition.enterprise_customer_uuid = enterprise_customer_uuid
-                self.instance.condition.enterprise_customer_name = enterprise_customer_name
+                self.instance.condition.enterprise_customer_name = enterprise_customer['name']
                 self.instance.condition.enterprise_customer_catalog_uuid = enterprise_customer_catalog_uuid
                 self.instance.condition.save()
             else:
                 self.instance.condition = create_condition(
                     EnterpriseCustomerCondition,
                     enterprise_customer_uuid=enterprise_customer_uuid,
-                    enterprise_customer_name=enterprise_customer_name,
+                    enterprise_customer_name=enterprise_customer['name'],
                     enterprise_customer_catalog_uuid=enterprise_customer_catalog_uuid,
                 )
 

@@ -469,7 +469,9 @@ class AtomicPublicationSerializer(serializers.Serializer):  # pylint: disable=ab
             # Explicitly delimit operations which will be rolled back if an exception is raised.
             with transaction.atomic():
                 site = self.context['request'].site
-                course, created = Course.objects.get_or_create(id=course_id, site=site)
+                course, created = Course.objects.get_or_create(
+                    id=course_id, site=site, partner=site.siteconfiguration.partner
+                )
                 course.name = course_name
                 course.verification_deadline = course_verification_deadline
                 course.save()

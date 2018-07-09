@@ -29,6 +29,7 @@ StockRecord = get_model('partner', 'StockRecord')
 
 class Course(models.Model):
     site = models.ForeignKey('sites.Site', verbose_name=_('Site'), null=False, blank=False, on_delete=models.PROTECT)
+    partner = models.ForeignKey('partner.Partner', null=True, blank=True, on_delete=models.CASCADE)
     id = models.CharField(null=False, max_length=255, primary_key=True, verbose_name='ID')
     name = models.CharField(null=False, max_length=255)
     verification_deadline = models.DateTimeField(
@@ -119,10 +120,6 @@ class Course(models.Model):
             if info.availability.is_available_to_buy:
                 return enrollment_code
         return None
-
-    @property
-    def partner(self):
-        return self.site.siteconfiguration.partner
 
     def get_course_seat_name(self, certificate_type, id_verification_required):
         """ Returns the name for a course seat. """

@@ -299,12 +299,6 @@ class CourseTests(DiscoveryTestMixin, TestCase):
         self.assertEqual(product_mode.attr.id_verification_required, False)
         self.assertEqual(product_mode.attr.certificate_type, 'professional')
 
-    def test_partner_property(self):
-        """ Partner property should return the correct partner. """
-        partner = self.site.siteconfiguration.partner
-        course = CourseFactory(id='abc', name='Test Course', site=self.site)
-        self.assertEqual(course.partner, partner)
-
     def test_type(self):
         """ Verify the property returns a type value corresponding to the available products. """
         course = CourseFactory(id='a/b/c', name='Test Course', site=self.site)

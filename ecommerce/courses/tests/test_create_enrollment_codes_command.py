@@ -50,7 +50,7 @@ class CreateEnrollmentCodesTests(DiscoveryTestMixin, TransactionTestCase):
         Returns:
             The created course.
         """
-        course = CourseFactory(site=self.site)
+        course = CourseFactory(site=self.site, partner=self.site.siteconfiguration.partner)
         course.create_or_update_seat(seat_type, False, Decimal(10.0), self.site.siteconfiguration.partner)
         return course
 

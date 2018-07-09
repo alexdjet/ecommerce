@@ -169,7 +169,8 @@ class AtomicPublicationTests(DiscoveryTestMixin, TestCase):
             id=self.course_id,
             name=self.course_name,
             verification_deadline=EXPIRES,
-            site=self.site
+            site=self.site,
+            partner=self.partner
         )
 
         # Create associated products.

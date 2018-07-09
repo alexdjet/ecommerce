@@ -523,7 +523,7 @@ class EnrollmentCodeFulfillmentModuleTests(DiscoveryTestMixin, TestCase):
 
     def setUp(self):
         super(EnrollmentCodeFulfillmentModuleTests, self).setUp()
-        course = CourseFactory(site=self.site)
+        course = CourseFactory(site=self.site, partner=self.partner)
         course.create_or_update_seat('verified', True, 50, self.partner, create_enrollment_code=True)
         enrollment_code = Product.objects.get(product_class__name=ENROLLMENT_CODE_PRODUCT_CLASS_NAME)
         user = factories.UserFactory()
